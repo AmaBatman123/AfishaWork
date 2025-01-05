@@ -4,7 +4,8 @@ from .models import Director, Movie, Review
 class DirectorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Director
-        fields = 'id name'.split()
+        # fields = 'id name'.split()
+        exclude = 'id'.split()
 
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,4 +15,4 @@ class MovieSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = 'id text'.split()
+        fields = '__all__'

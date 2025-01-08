@@ -1,3 +1,4 @@
+from django.db.models import Avg
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -57,4 +58,26 @@ def detail_review_view(request, id):
     review = Review.objects.get(id=id)
     data = ReviewSerializer(instance=review).data
     return Response(data=data)
+
+@api_view(http_method_names=['GET'])
+def movies_with_reviews_list(request):
+    movies = Movie.objects.all()
+    data_movies = []
+
+    for movie in movies:
+        reviews = movie.review_set.all()
+        avg_rating = reviews.aggregate(Avg('stars'))['stars__avg']
+        data_review = ReviewSerializer(instance=reviews, many=True).data
+
+        data_movies.append({
+            'id': movie.id,
+            'title': movie.title,
+            'description': movie.description,
+            'duration': movie.duration,
+            'director': movie.director.name,
+            'reviews': data_review,
+            'rating': avg_rating if avg_rating else 0
+        })
+
+    return Response(data=data_movies)
 

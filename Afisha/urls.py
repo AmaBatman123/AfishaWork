@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from movie_app.views import (directors_list, movies_list, reviews_list,
                              detail_director_view, detail_movie_view,
-                             detail_review_view)
+                             detail_review_view, movies_with_reviews_list)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +30,5 @@ urlpatterns = [
 
     path('api/v1/reviews/', reviews_list),
     path('api/v1/reviews/<int:id>/', detail_review_view),
+    path('api/v1/movies/reviews/', movies_with_reviews_list),
 ]

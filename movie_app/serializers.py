@@ -2,10 +2,11 @@ from rest_framework import serializers
 from .models import Director, Movie, Review
 
 class DirectorSerializer(serializers.ModelSerializer):
+    movie_count = serializers.IntegerField(read_only=True)
+
     class Meta:
         model = Director
-        # fields = 'id name'.split()
-        exclude = 'id'.split()
+        fields = 'id name movie_count'.split()
 
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:

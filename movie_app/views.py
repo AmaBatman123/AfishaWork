@@ -1,16 +1,15 @@
-from django.db.models import Avg
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Director, Movie, Review
 from .serializers import DirectorSerializer, MovieSerializer, ReviewSerializer
+from django.db.models import Avg, Count
 
 @api_view(http_method_names=['GET', 'POST'])
 def directors_list(request):
     if request.method == 'GET':
-        try:
-            directors = Director.objects.all()
-        except directors.DoesNotExist:
+        directors = Director.objects.annotate(movie_count=Count('movie'))
+        if not directors:
             return Response(status=status.HTTP_404_NOT_FOUND,
                             data={'message': 'Directors not found'})
 

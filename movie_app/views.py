@@ -5,12 +5,12 @@ from .models import Director, Movie, Review
 from .serializers import DirectorSerializer, MovieSerializer, ReviewSerializer
 from django.db.models import Avg, Count
 
-@api_view(http_method_names=['GET', 'POST'])
+@api_view(['GET', 'POST'])
 def directors_list(request):
     if request.method == 'GET':
         directors = Director.objects.annotate(movie_count=Count('movie'))
-        data_directors = DirectorSerializer(instance=directors, many=True).data
-        return Response(data_directors)
+        serializer = DirectorSerializer(directors, many=True)
+        return Response(serializer.data)
     elif request.method == 'POST':
         serializer = DirectorSerializer(data=request.data)
         if serializer.is_valid():
@@ -18,8 +18,7 @@ def directors_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-@api_view(http_method_names=['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def detail_director_view(request, id):
     try:
         director = Director.objects.get(id=id)
@@ -27,8 +26,8 @@ def detail_director_view(request, id):
         return Response({'error': 'Director not found'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        data = DirectorSerializer(instance=director).data
-        return Response(data)
+        serializer = DirectorSerializer(director)
+        return Response(serializer.data)
     elif request.method == 'PUT':
         serializer = DirectorSerializer(instance=director, data=request.data)
         if serializer.is_valid():
@@ -38,6 +37,7 @@ def detail_director_view(request, id):
     elif request.method == 'DELETE':
         director.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 @api_view(http_method_names=['GET', 'POST'])
 def movies_list(request):

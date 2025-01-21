@@ -18,6 +18,16 @@ class MovieSerializer(serializers.ModelSerializer):
         model = Movie
         fields = 'id title description duration director'.split()
 
+        def validate_title(self, value):
+            if len(value) < 3:
+                raise serializers.ValidationError("Название фильма должно быть не менее 3 символов.")
+            return value
+
+        def validate_duration(self, value):
+            if value <= 0:
+                raise serializers.ValidationError("Продолжительность фильма должна быть положительным числом.")
+            return value
+
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review

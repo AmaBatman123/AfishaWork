@@ -39,12 +39,12 @@ def detail_director_view(request, id):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(http_method_names=['GET', 'POST'])
+@api_view(['GET', 'POST'])
 def movies_list(request):
     if request.method == 'GET':
         movies = Movie.objects.all()
-        data_movies = MovieSerializer(instance=movies, many=True).data
-        return Response(data_movies)
+        serializer = MovieSerializer(movies, many=True)
+        return Response(serializer.data)
     elif request.method == 'POST':
         serializer = MovieSerializer(data=request.data)
         if serializer.is_valid():
@@ -52,8 +52,7 @@ def movies_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-@api_view(http_method_names=['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def detail_movie_view(request, id):
     try:
         movie = Movie.objects.get(id=id)
@@ -61,8 +60,8 @@ def detail_movie_view(request, id):
         return Response({'error': 'Movie not found'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        data = MovieSerializer(instance=movie).data
-        return Response(data)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data)
     elif request.method == 'PUT':
         serializer = MovieSerializer(instance=movie, data=request.data)
         if serializer.is_valid():
@@ -73,12 +72,13 @@ def detail_movie_view(request, id):
         movie.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-@api_view(http_method_names=['GET', 'POST'])
+
+@api_view(['GET', 'POST'])
 def reviews_list(request):
     if request.method == 'GET':
         reviews = Review.objects.all()
-        data_reviews = ReviewSerializer(instance=reviews, many=True).data
-        return Response(data_reviews)
+        serializer = ReviewSerializer(reviews, many=True)
+        return Response(serializer.data)
     elif request.method == 'POST':
         serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid():
@@ -86,7 +86,7 @@ def reviews_list(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(http_method_names=['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'DELETE'])
 def detail_review_view(request, id):
     try:
         review = Review.objects.get(id=id)
@@ -94,8 +94,8 @@ def detail_review_view(request, id):
         return Response({'error': 'Review not found'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        data = ReviewSerializer(instance=review).data
-        return Response(data)
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data)
     elif request.method == 'PUT':
         serializer = ReviewSerializer(instance=review, data=request.data)
         if serializer.is_valid():
@@ -105,6 +105,7 @@ def detail_review_view(request, id):
     elif request.method == 'DELETE':
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 @api_view(http_method_names=['GET'])
 def movies_with_reviews_list(request):

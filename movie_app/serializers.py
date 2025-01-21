@@ -8,6 +8,11 @@ class DirectorSerializer(serializers.ModelSerializer):
         model = Director
         fields = 'id name movie_count'.split()
 
+        def validate_name(self, value):
+            if len(value) < 3:
+                raise serializers.ValidationError("Имя режиссера должно быть более 3 символов")
+            return value
+
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie

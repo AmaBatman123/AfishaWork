@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 
-from .models import Director, Movie, Review
+from .models import Director, Movie, Review, ConfirmationCode
 
 class DirectorSerializer(serializers.ModelSerializer):
     movie_count = serializers.IntegerField(read_only=True)
@@ -64,8 +64,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
         return user
 
-class ConfirmUserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField()
+class ConfirmUserSerializer(serializers.Serializer):  # Это не ModelSerializer
+    username = serializers.CharField(max_length=150)
     code = serializers.CharField(max_length=6)
 
     def validate(self, data):
@@ -75,6 +75,6 @@ class ConfirmUserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Пользователь не найден")
 
         if not user.confirmation_code.code == data['code']:
-            raise serializers.ValidationError("неверный код подтверждения")
+            raise serializers.ValidationError("Неверный код подтверждения")
 
         return data

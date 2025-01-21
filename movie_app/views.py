@@ -1,9 +1,14 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Director, Movie, Review
-from .serializers import DirectorSerializer, MovieSerializer, ReviewSerializer
+from .models import Director, Movie, Review, ConfirmationCode
+from .serializers import ( DirectorSerializer, MovieSerializer, ReviewSerializer,
+                            RegisterSerializer, ConfirmUserSerializer)
 from django.db.models import Avg, Count
+from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+from rest_framework.views import APIView
 
 @api_view(['GET', 'POST'])
 def directors_list(request):
@@ -129,3 +134,48 @@ def movies_with_reviews_list(request):
 
     return Response(data=data_movies)
 
+
+class RegisterView(APIView):
+    def post(self, request):
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            user = User.objects.create_user(
+                username=serializer.validated_data['username'],
+                email=serializer.validated_data['email'],
+                password=serializer.validated_data['password'],
+            )
+            user.is_active = False
+            user.save()
+
+            ConfirmationCode.objects.create(user=user)
+
+            return Response({'message': 'Регистрация успешна. Проверьте код подтверждения.'},
+                            status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(username=username, password=password)
+
+        if not user:
+            return Response({'error': 'Неверные учетные данные'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if not user.is_active:
+            return Response({'error': 'Пользователь не активен'}, status=status.HTTP_400_BAD_REQUEST)
+
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key})
+
+class ConfirmUserView(APIView):
+    def post(self, request):
+        serializer = ConfirmUserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = User.objects.get(username=request.data['username'])
+            user.is_active = True
+            user.save()
+            user.confirmation_code.delete()
+            return Response({'message': 'Пользователь успешно подтвержден'}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

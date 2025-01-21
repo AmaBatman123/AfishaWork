@@ -38,7 +38,7 @@ class ConfirmationCode(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.code:
-            self.code = str(random.randint(1000000, 9999999))
+            self.code = str(random.randint(100000, 999999))
         super().save(*args, **kwargs)
 
     def __str__(self):

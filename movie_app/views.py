@@ -1,4 +1,4 @@
-from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Director, Movie, Review, ConfirmationCode
@@ -8,40 +8,47 @@ from django.db.models import Avg, Count
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
-from rest_framework.views import APIView
 
-@api_view(['GET', 'POST'])
-def directors_list(request):
-    if request.method == 'GET':
+class DirectorsListView(APIView):
+    def get(self, request):
         directors = Director.objects.annotate(movie_count=Count('movie'))
         serializer = DirectorSerializer(directors, many=True)
         return Response(serializer.data)
-    elif request.method == 'POST':
+
+    def post(self, request):
         serializer = DirectorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def detail_director_view(request, id):
-    try:
-        director = Director.objects.get(id=id)
-    except Director.DoesNotExist:
-        return Response({'error': 'Director not found'}, status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
-        serializer = DirectorSerializer(director)
-        return Response(serializer.data)
-    elif request.method == 'PUT':
-        serializer = DirectorSerializer(instance=director, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
+class DirectorDetailView(APIView):
+    def get(self, request, id):
+        try:
+            director = Director.objects.get(id=id)
+            serializer = DirectorSerializer(director)
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'DELETE':
-        director.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        except Director.DoesNotExist:
+            return Response({'error': 'Director not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, id):
+        try:
+            director = Director.objects.get(id=id)
+            serializer = DirectorSerializer(instance=director, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Director.DoesNotExist:
+            return Response({'error': 'Director not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, id):
+        try:
+            director = Director.objects.get(id=id)
+            director.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Director.DoesNotExist:
+            return Response({'error': 'Director not found'}, status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['GET', 'POST'])

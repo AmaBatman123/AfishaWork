@@ -16,24 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from movie_app.views import (directors_list, movies_list, reviews_list,
-                             detail_director_view, detail_movie_view,
-                             detail_review_view, movies_with_reviews_list,
-                             RegisterView, LoginView, ConfirmUserView)
+from movie_app.views import (DirectorsListView, DirectorDetailView,
+                            MoviesListView, MovieDetailView,
+                            ReviewsListView, ReviewDetailView,
+                            RegisterView, LoginView, ConfirmUserView)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/v1/directors/', directors_list),
-    path('api/v1/directors/<int:id>/', detail_director_view),
-
-    path('api/v1/movies/', movies_list),
-    path('api/v1/movies/<int:id>/', detail_movie_view),
-
-    path('api/v1/reviews/', reviews_list),
-    path('api/v1/reviews/<int:id>/', detail_review_view),
-    path('api/v1/movies/reviews/', movies_with_reviews_list),
-
+    path('api/v1/directors/', DirectorsListView.as_view(), name='directors_list'),
+    path('api/v1/directors/<int:id>/', DirectorDetailView.as_view(), name='director_detail'),
+    path('api/v1/movies/', MoviesListView.as_view(), name='movies_list'),
+    path('api/v1/movies/<int:id>/', MovieDetailView.as_view(), name='movie_detail'),
+    path('api/v1/reviews/', ReviewsListView.as_view(), name='reviews_list'),
+    path('api/v1/reviews/<int:id>/', ReviewDetailView.as_view(), name='review_detail'),
     path('api/v1/users/register/', RegisterView.as_view(), name='register'),
     path('api/v1/users/login/', LoginView.as_view(), name='login'),
-    path('api/v1/users/confirm/', ConfirmUserView.as_view(), name='confirm'),
+    path('api/v1/users/confirm/', ConfirmUserView.as_view(), name='confirm_user'),
 ]

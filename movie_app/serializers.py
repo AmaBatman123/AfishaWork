@@ -63,3 +63,18 @@ class RegisterSerializer(serializers.ModelSerializer):
             is_active=False
         )
         return user
+
+class ConfirmUserSerializer(serializers.ModelSerializer):
+    username = serializers.CharField()
+    code = serializers.CharField(max_length=6)
+
+    def validate(self, data):
+        try:
+            user = User.objects.get(username=data['username'])
+        except User.DoesNotExist:
+            raise serializers.ValidationError("Пользователь не найден")
+
+        if not user.confirmation_code.code == data['code']:
+            raise serializers.ValidationError("неверный код подтверждения")
+
+        return data

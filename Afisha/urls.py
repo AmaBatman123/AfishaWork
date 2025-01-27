@@ -22,6 +22,7 @@ from movie_app.views import (DirectorsListView, DirectorDetailView,
                             RegisterView, LoginView, ConfirmUserView)
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('api/v1/directors/', DirectorsListView.as_view(), name='directors_list'),
     path('api/v1/directors/<int:id>/', DirectorDetailView.as_view(), name='director_detail'),
     path('api/v1/movies/', MoviesListView.as_view(), name='movies_list'),

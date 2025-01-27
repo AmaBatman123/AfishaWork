@@ -1,0 +1,364 @@
+[
+  {
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2025-01-05T14:18:23.538Z",
+      "change_message": "[{\"added\": {}}]",
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "Tarantino",
+      "user": 1
+    },
+    "model": "admin.logentry",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2025-01-05T14:18:31.459Z",
+      "change_message": "[{\"added\": {}}]",
+      "content_type": 7,
+      "object_id": "2",
+      "object_repr": "Ne Tarantino",
+      "user": 1
+    },
+    "model": "admin.logentry",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2025-01-05T14:18:54.480Z",
+      "change_message": "[{\"added\": {}}]",
+      "content_type": 8,
+      "object_id": "1",
+      "object_repr": "Blade",
+      "user": 1
+    },
+    "model": "admin.logentry",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2025-01-05T14:19:03.319Z",
+      "change_message": "[{\"added\": {}}]",
+      "content_type": 8,
+      "object_id": "2",
+      "object_repr": "NeBlade",
+      "user": 1
+    },
+    "model": "admin.logentry",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2025-01-05T14:19:09.927Z",
+      "change_message": "[{\"added\": {}}]",
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "Review for Blade",
+      "user": 1
+    },
+    "model": "admin.logentry",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2025-01-05T14:19:14.669Z",
+      "change_message": "[{\"added\": {}}]",
+      "content_type": 9,
+      "object_id": "2",
+      "object_repr": "Review for NeBlade",
+      "user": 1
+    },
+    "model": "admin.logentry",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2025-01-08T16:32:30.261Z",
+      "change_message": "[{\"added\": {}}]",
+      "content_type": 9,
+      "object_id": "3",
+      "object_repr": "Review for Blade",
+      "user": 1
+    },
+    "model": "admin.logentry",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "action_flag": 1,
+      "action_time": "2025-01-08T16:41:01.019Z",
+      "change_message": "[{\"added\": {}}]",
+      "content_type": 8,
+      "object_id": "3",
+      "object_repr": "OneToOne",
+      "user": 1
+    },
+    "model": "admin.logentry",
+    "pk": 8
+  },
+  {
+    "fields": {
+      "date_joined": "2025-01-05T14:14:42.961Z",
+      "email": "",
+      "first_name": "",
+      "groups": [],
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": true,
+      "last_login": "2025-01-27T09:46:23.553Z",
+      "last_name": "",
+      "password": "pbkdf2_sha256$870000$a7ChEtIOr8oswyRHwnOMnp$XX7dRzAFm7HSjztDPLN3xBnT1+jwbgICqnJPLhxCkgo=",
+      "user_permissions": [],
+      "username": "admin"
+    },
+    "model": "auth.user",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "date_joined": "2025-01-21T10:50:16.412Z",
+      "email": "testuser@example.com",
+      "first_name": "",
+      "groups": [],
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "last_login": null,
+      "last_name": "",
+      "password": "pbkdf2_sha256$870000$IZRfYEfd1MLKxWgvDpIO7x$+F4w76rfuNXo2smEptR4QvEumpEjpN21D4VHLfROdiw=",
+      "user_permissions": [],
+      "username": "testuser"
+    },
+    "model": "auth.user",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "date_joined": "2025-01-21T10:56:18.135Z",
+      "email": "example@mail.com",
+      "first_name": "",
+      "groups": [],
+      "is_active": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "last_login": null,
+      "last_name": "",
+      "password": "pbkdf2_sha256$870000$yfnKDoK9N6d8fPRodolgKJ$woQ9PyNnAkaXCq0Hf6FbOq1Z06CWXGf5CiORgbEYnAI=",
+      "user_permissions": [],
+      "username": "testuser2"
+    },
+    "model": "auth.user",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "date_joined": "2025-01-21T11:04:53.166Z",
+      "email": "test@ai.com",
+      "first_name": "",
+      "groups": [],
+      "is_active": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "last_login": null,
+      "last_name": "",
+      "password": "pbkdf2_sha256$870000$U1jfOca14ldV2s5y6mYfFt$txE4yCwsVOHDRdjcRUYg8f7+xPpHfaYSzB9bCAZgwzA=",
+      "user_permissions": [],
+      "username": "testuser3"
+    },
+    "model": "auth.user",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "date_joined": "2025-01-21T11:12:27.170Z",
+      "email": "test@ai.com",
+      "first_name": "",
+      "groups": [],
+      "is_active": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "last_login": null,
+      "last_name": "",
+      "password": "pbkdf2_sha256$870000$zoe6aRGmEAb8er1zxT9HGu$GMVRmdKitwQPp2lCHJr/a05KkssjozTm9oJMdtrcrAw=",
+      "user_permissions": [],
+      "username": "testuser4"
+    },
+    "model": "auth.user",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "date_joined": "2025-01-21T11:14:28.192Z",
+      "email": "test@ai.com",
+      "first_name": "",
+      "groups": [],
+      "is_active": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "last_login": null,
+      "last_name": "",
+      "password": "pbkdf2_sha256$870000$r9gN4URi8flll5OUJJXvUj$O5piRgFmWNmiVMiFFZE0JxofVJGfNip8PCw9wx9zh5Q=",
+      "user_permissions": [],
+      "username": "testuser5"
+    },
+    "model": "auth.user",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "date_joined": "2025-01-21T11:15:49.574Z",
+      "email": "test@ai.com",
+      "first_name": "",
+      "groups": [],
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "last_login": null,
+      "last_name": "",
+      "password": "pbkdf2_sha256$870000$PlsuYjTCVQugQLsc7opqJq$Jcg8XTAN+zQIv9VGY/rvjfpC+ZbkvJoi7dm3VUbEToY=",
+      "user_permissions": [],
+      "username": "testuser6"
+    },
+    "model": "auth.user",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "date_joined": "2025-01-21T11:55:38.238Z",
+      "email": "test@ai.com",
+      "first_name": "",
+      "groups": [],
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "last_login": null,
+      "last_name": "",
+      "password": "pbkdf2_sha256$870000$RS2DVPQrwHW3Xg1kKm37mz$sxx/tGGCyTFM9iMXJX3qle1BxS6TpsjsmVJwMT2q75c=",
+      "user_permissions": [],
+      "username": "testuser7"
+    },
+    "model": "auth.user",
+    "pk": 8
+  },
+  {
+    "fields": {
+      "expire_date": "2025-01-19T14:15:42.134Z",
+      "session_data": ".eJxVjEEOwiAQRe_C2pAZpIG6dO8ZyMAwUjWQlHbVeHdt0oVu_3vvbyrQupSw9jyHidVFoTr9bpHSM9cd8IPqvenU6jJPUe-KPmjXt8b5dT3cv4NCvXxrsODOmUSAxI84CtIgyILoUwRIaKyDKMajs9ZYGEyK5Nk4yijoWL0_3bc3sA:1tURPq:S-XqX_zlDOzit_KppoaEY-7dSuj4bIEE2YZlLugDxu8"
+    },
+    "model": "sessions.session",
+    "pk": "hdf6671chw828mcqa3menr2oqkrx49tk"
+  },
+  {
+    "fields": {
+      "expire_date": "2025-02-10T09:46:23.562Z",
+      "session_data": ".eJxVjEEOwiAQRe_C2pAZpIG6dO8ZyMAwUjWQlHbVeHdt0oVu_3vvbyrQupSw9jyHidVFoTr9bpHSM9cd8IPqvenU6jJPUe-KPmjXt8b5dT3cv4NCvXxrsODOmUSAxI84CtIgyILoUwRIaKyDKMajs9ZYGEyK5Nk4yijoWL0_3bc3sA:1tcLhH:qCVo6es86_6W20MWQvdldRqybMYmNiFwkYKlSIWJBmY"
+    },
+    "model": "sessions.session",
+    "pk": "sv88kt8obh9oe6ogquhyv3rh95ds52h5"
+  },
+  {
+    "fields": {
+      "name": "Steven Spielberg"
+    },
+    "model": "movie_app.director",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "name": "Ne Tarantino"
+    },
+    "model": "movie_app.director",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "name": "A"
+    },
+    "model": "movie_app.director",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "description": "DescDescDescDescDescDescDescDescDesc",
+      "director": 1,
+      "duration": 2,
+      "title": "Blade"
+    },
+    "model": "movie_app.movie",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "description": "DescDescDesc",
+      "director": 2,
+      "duration": 1,
+      "title": "NeBlade"
+    },
+    "model": "movie_app.movie",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "movie": 1,
+      "stars": 0,
+      "text": "Class!"
+    },
+    "model": "movie_app.review",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "movie": 2,
+      "stars": 0,
+      "text": "neClass!"
+    },
+    "model": "movie_app.review",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "code": "973081",
+      "user": 3
+    },
+    "model": "movie_app.confirmationcode",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "code": "445377",
+      "user": 4
+    },
+    "model": "movie_app.confirmationcode",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "code": "437325",
+      "user": 5
+    },
+    "model": "movie_app.confirmationcode",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "created": "2025-01-21T11:57:05.949Z",
+      "user": 8
+    },
+    "model": "authtoken.token",
+    "pk": "c94d0d67cc55149bcec0fdd59483f6fecd0f5fd5"
+  },
+  {
+    "fields": {
+      "created": "2025-01-21T11:50:15.562Z",
+      "user": 2
+    },
+    "model": "authtoken.token",
+    "pk": "ce2bb55c4611637c7193f7902390a21dfc3917c4"
+  }]
